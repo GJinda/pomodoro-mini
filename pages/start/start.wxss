@@ -1,1 +1,30 @@
-/* pages/start/start.wxss */
+/* @import "../../components/taskItem/taskItem.wxss";
+.task-item-wrapper {
+  width: 100px;
+  height: 100px;
+} */
+.box {
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.cu-form-group input {
+  font-size: 28rpx;
+  color: #666;
+}
+.cu-form-group textarea {
+  color: #666;
+}
+.task-list.menu{
+  max-height: 320rpx;
+  overflow: auto;
+}
+.task-list > .cu-item .content text{
+  font-size: 28rpx;
+}
+.task-list.menu.xs-border > .cu-item:after {
+	left: 80rpx;
+	width: calc(200% - 320rpx)
+}

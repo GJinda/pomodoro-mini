@@ -1,1 +1,10 @@
-/* pages/stats/stats.wxss */
+.box {
+  height: 100vh;
+  background: #fff;
+  display: flex;
+  flex-direction: column;
+}
+.box > .dashboard .today,
+.box > .dashboard .total{
+  padding: 60rpx 80rpx 20rpx;
+}

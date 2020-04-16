@@ -1,2 +1,25 @@
-<!--pages/stats/stats.wxml-->
-<text>pages/stats/stats.wxml</text>
+<view class="box">
+	<view class="dashboard flex justify-center">
+		<view class="today flex flex-direction align-center">
+			<view>今日番茄个数</view>
+			<view class="margin-top text-cyan text-xxl">{{total}}</view>
+		</view>
+		<view class="total flex flex-direction align-center">
+			<view>累计番茄个数</view>
+			<view class="margin-top text-cyan text-xxl">{{todayTotal}}</view>
+		</view>
+	</view>
+	<view wx:for="{{dayTaskList}}" wx:key="day" class="cu-timeline">
+		<view class="cu-time">{{item.day.month < 10? "0"+item.day.month : item.day.month}}-{{item.day.day < 10? "0"+item.day.day : item.day.day}}</view>
+		<view wx:for="{{item.tasks}}" class="cu-item text-cyan">
+			<view class="content">
+				<view class="cu-capsule radius align-center">
+					<view class="cu-tag bg-cyan">{{item.finishTime.hour <= 12? "上午":"下午"}}</view>
+					<view class="cu-tag line-cyan">{{item.finishTime.hour < 10? "0"+item.finishTime.hour : item.finishTime.hour > 12? item.finishTime.hour-12 : item.finishTime.hour}}:{{item.finishTime.minute < 10? "0"+item.finishTime.minute : item.finishTime.minute}}</view>
+					<view class="margin-left-sm text-sm text-cyan">{{item.taskName}}</view>
+				</view>
+				<view wx:if="{{item.taskDetail}}" class="margin-top text-sm">{{item.taskDetail}}</view>
+			</view>
+		</view>
+	</view>
+</view>

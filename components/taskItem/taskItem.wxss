@@ -1,0 +1,9 @@
+/* components/taskItem/taskItem.wxss */
+.task-item {
+  width: 100%;
+  height: 100%;
+}
+
+.border-red{
+  border:1rpx solid #ef5350;
+}

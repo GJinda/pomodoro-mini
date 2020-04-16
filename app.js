@@ -32,8 +32,67 @@ App({
         }
       }
     })
+    // 获取系统状态栏信息
+    wx.getSystemInfo({
+      success: e => {
+        this.globalData.StatusBar = e.statusBarHeight;
+        let capsule = wx.getMenuButtonBoundingClientRect();
+        if (capsule) {
+         	this.globalData.Custom = capsule;
+        	this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+        } else {
+        	this.globalData.CustomBar = e.statusBarHeight + 50;
+        }
+      }
+    })
   },
   globalData: {
-    userInfo: null
+    userInfo: null,
+    colorList: [{
+        title: '嫣红',
+        name: 'red',
+        color: '#e54d42'
+      },
+      {
+        title: '桔橙',
+        name: 'orange',
+        color: '#f37b1d'
+      },
+      {
+        title: '明黄',
+        name: 'yellow',
+        color: '#fbbd08'
+      },
+      {
+        title: '橄榄',
+        name: 'olive',
+        color: '#8dc63f'
+      },
+      {
+        title: '天青',
+        name: 'cyan',
+        color: '#1cbbb4'
+      },
+      {
+        title: '海蓝',
+        name: 'blue',
+        color: '#0081ff'
+      },
+      {
+        title: '墨黑',
+        name: 'black',
+        color: '#333333'
+      },
+      {
+        title: '玄灰',
+        name: 'grey',
+        color: '#8799a3'
+      },
+      {
+        title: '雅白',
+        name: 'white',
+        color: '#ffffff'
+      },
+    ]
   }
 })

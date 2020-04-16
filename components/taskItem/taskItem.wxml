@@ -1,0 +1,2 @@
+<!--components/taskItem/taskItem.wxml-->
+<view class="task-item border-{{themeColor}}"></view>

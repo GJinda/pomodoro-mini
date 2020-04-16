@@ -1,2 +1,68 @@
-<!--pages/start/start.wxml-->
-<text>pages/start/start.wxml</text>
+<view class="box">
+	<view class="bg-white flex flex-direction align-center">
+		<view class="margin-sm text-xl text-bold">选择一项任务</view>
+		<view class="margin-sm flex align-center">
+			在接下来的
+			<picker bindchange="tomatoTimePickerChange" value="{{tomatoTimeIndex}}" range="{{tomatoTimeList}}">
+				<text style="margin:0 10rpx" class="cu-btn bg-red round">{{tomatoTimeList[tomatoTimeIndex]}}</text>
+			</picker>
+			，专注做这件事
+		</view>
+	</view>
+
+	<view class="cu-list grid {{taskList.length<3?'margin-lg':'margin'}} col-{{gridCol}} {{gridBorder?'':'no-border'}}">
+		<view class="cu-item" wx:for="{{iconList}}" wx:key="name" wx:if="{{index<gridCol*2}}">
+			<view class="content" data-task-name="{{item.name}}" bindtap="toTimer">
+				<view class="cuIcon-{{item.icon}} text-{{item.color}}">
+					<view class="cu-tag badge" wx:if="{{item.badge!=0}}">
+						<block wx:if="{{item.badge!=1}}">{{item.badge>99?"99+":item.badge}}</block>
+					</view>
+				</view>
+				<text style="color:#999">{{item.name}}</text>
+			</view>
+		</view>
+	</view>
+
+	<view class="bg-white flex flex-direction align-center">
+		<view class="margin-sm">
+			或者，
+			<text style="margin:0 6rpx" class="cu-btn bg-red round" bindtap="showModal" data-target="taskModal">自定义</text>
+			一项任务
+		</view>
+	</view>
+	<view class="cu-modal {{modalName=='taskModal'?'show':''}}" bindtap="hideModal">
+		<view class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:280rpx">
+				<form bindsubmit="ok" bindreset="cancel">
+					<view class="cu-form-group flex align-center text-left">
+						<view class="title">任务名称</view>
+						<input name="taskName" bindinput="taskNameInput" placeholder="点击此处填写（必填）"></input>
+					</view>
+					<view class="cu-form-group flex align-start text-left">
+						<view class="title">任务描述</view>
+						<textarea hidden="{{modalName!='taskModal'}}" class="area" name="taskDetail" bindinput="taskDetailInput" placeholder="点击此处填写"></textarea>
+					</view>
+					<view class="cu-form-group flex justify-end align-center">
+						<button formType="reset" style="width:120rpx; font-weight:normal; margin:0 30rpx 0 0" class="cu-btn line-red round">取消</button>
+						<button formType="submit" style="width:120rpx; font-weight:normal; margin:0" class="cu-btn bg-red round">确定</button>
+					</view>
+				</form>
+			</scroll-view>
+		</view>
+	</view>
+
+	<view class="cu-list task-list menu xs-border {{taskList.length<3?'margin-lg':'margin'}} {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
+		<view wx:for="{{taskList}}" wx:key="taskName" style="padding:0 90rpx;" class="cu-item {{menuArrow?'arrow':''}}">
+			<view class="content margin-0 flex justify-between align-center" data-task-name="{{item.taskName}}" data-task-detail="{{item.taskDetail}}" bindtap="toTimer">
+				<view class="content">
+					<text class="cuIcon-title text-red"></text>
+					<text style="color:#999">{{item.taskName}}</text>
+				</view>
+				<view class="flex">
+					<!-- <view wx:for="{{item.taskTomato}}">·</view> -->
+					<view wx:if="{{item.finished}}" class="cuIcon-roundcheck text-red"></view>
+				</view>
+			</view>
+		</view>
+	</view>
+</view>

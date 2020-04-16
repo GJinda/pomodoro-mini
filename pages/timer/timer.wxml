@@ -1,0 +1,31 @@
+<view class="box bg-red">
+	<view wx:if="{{timer}}" class="circle-wrapper">
+		<view class="{{timer?'animation-scale-down':'animation-scale-down animation-reverse'}} time-text">{{timeStr}}</view>
+		<view class="line-circle"></view>
+		<view hidden="{{!timer}}" class="line-circle large"></view>
+		<view class="right wrapper">
+			<view style="transform:rotate({{leftDeg}}deg)" class="circle left-circle-white"></view>
+		</view>
+		<view class="left wrapper">
+			<view style="transform:rotate({{rightDeg}}deg)" class="circle right-circle-white"></view>
+		</view>
+	</view>
+	<view wx:else class="{{timer?'animation-scale-down animation-reverse':'animation-scale-down'}} emoji cuIcon-emoji circle-wrapper"></view>
+	<!-- <view>显示剩余秒数：{{time}}</view> -->
+	<button style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn bg-white text-red round margin-sm" hidden="{{time}}" bindtap="startNewTimer">开始新番茄</button>
+	<button style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn bg-white text-red round margin-sm" hidden="{{!time||timer}}" bindtap="startTimer">继续</button>
+	<button style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn line-white round margin-sm" hidden="{{!time||!timer}}" bindtap="clearTimer">暂停</button>
+	<button style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn line-white round margin-sm" hidden="{{!time}}" bindtap="showModal" data-target="confirmModal">放弃</button>
+	<button style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn line-white round margin-sm" hidden="{{time}}" bindtap="toStart">返回</button>
+	<view class="cu-modal {{modalName=='confirmModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:500rpx" class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:280rpx">
+				<view style="padding:90rpx" class="bg-white flex justify-center align-center text-black text-bold">确定要放弃吗？</view>
+				<view style="padding-bottom:40rpx" class="bg-white flex justify-center align-center">
+					<button style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round" bindtap="cancel">取消</button>
+					<button style="width:160rpx; font-weight:normal; margin:0" class="cu-btn bg-red round" bindtap="ok">确定</button>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+</view>
