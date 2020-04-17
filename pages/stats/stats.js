@@ -1,5 +1,6 @@
 Page({
   data: {
+    isLoading: true,
     finishTaskList: [],
     days: [],
     dayTaskList: [],
@@ -7,7 +8,11 @@ Page({
     todayTotal: 0
   },
   onShow() {
+    wx.showLoading({
+      title: '加载中',
+    })
     this.setData({
+      isLoading: true,
       finishTaskList: [],
       days: [],
       dayTaskList: [],
@@ -74,6 +79,12 @@ Page({
             })
           }
         }
+        setTimeout(() => {
+          wx.hideLoading()
+        }, 200);
+        this.setData({
+          isLoading: false
+        })
       },
       fail: (res) => {
         console.log(res.errMsg)

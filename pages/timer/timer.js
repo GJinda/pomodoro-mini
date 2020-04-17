@@ -11,6 +11,7 @@ Page({
 
     taskName: "",
     taskDetail: "",
+    taskColor: "",
     finishTime: "",
 
     modalName: null,
@@ -29,6 +30,7 @@ Page({
       halfTime: parseInt(params.tomatoTime.slice(0, 2)) / 2,
       taskName: params.taskName || "",
       taskDetail: params.taskDetail || "",
+      taskColor: params.taskColor || "red"
     })
   },
   onShow() {
@@ -53,7 +55,7 @@ Page({
         wx.getStorage({
           key: 'finishTask',
           success: (res) => {
-            console.log("after", JSON.parse(res.data))
+            console.log("add finish task", JSON.parse(res.data))
           }
         })
       },
@@ -67,7 +69,7 @@ Page({
         wx.getStorage({
           key: 'finishTask',
           success: (res) => {
-            console.log("after", JSON.parse(res.data))
+            console.log("add finish task", JSON.parse(res.data))
           }
         })
       }
@@ -109,6 +111,7 @@ Page({
         let finishTaskObj = {
           taskName: this.data.taskName,
           taskDetail: this.data.taskDetail,
+          taskColor: this.data.taskColor,
           finishTime: this.getDateObj(),
         }
         this.finishTask(finishTaskObj)

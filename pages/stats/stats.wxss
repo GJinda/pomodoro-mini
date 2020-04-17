@@ -6,5 +6,9 @@
 }
 .box > .dashboard .today,
 .box > .dashboard .total{
-  padding: 60rpx 80rpx 20rpx;
+  padding: 70rpx 80rpx 30rpx;
+}
+.none-wrapper{
+  height: 450rpx;
+  transform: scale(0.6)
 }

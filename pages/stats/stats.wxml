@@ -2,24 +2,30 @@
 	<view class="dashboard flex justify-center">
 		<view class="today flex flex-direction align-center">
 			<view>今日番茄个数</view>
-			<view class="margin-top text-cyan text-xxl">{{total}}</view>
+			<view class="margin-top text-red text-xxl">{{total}}</view>
 		</view>
 		<view class="total flex flex-direction align-center">
 			<view>累计番茄个数</view>
-			<view class="margin-top text-cyan text-xxl">{{todayTotal}}</view>
+			<view class="margin-top text-red text-xxl">{{todayTotal}}</view>
 		</view>
 	</view>
-	<view wx:for="{{dayTaskList}}" wx:key="day" class="cu-timeline">
-		<view class="cu-time">{{item.day.month < 10? "0"+item.day.month : item.day.month}}-{{item.day.day < 10? "0"+item.day.day : item.day.day}}</view>
-		<view wx:for="{{item.tasks}}" class="cu-item text-cyan">
-			<view class="content">
-				<view class="cu-capsule radius align-center">
-					<view class="cu-tag bg-cyan">{{item.finishTime.hour <= 12? "上午":"下午"}}</view>
-					<view class="cu-tag line-cyan">{{item.finishTime.hour < 10? "0"+item.finishTime.hour : item.finishTime.hour > 12? item.finishTime.hour-12 : item.finishTime.hour}}:{{item.finishTime.minute < 10? "0"+item.finishTime.minute : item.finishTime.minute}}</view>
-					<view class="margin-left-sm text-sm text-cyan">{{item.taskName}}</view>
+	<view hidden="{{isLoading || dayTaskList.length}}" class="none-wrapper flex flex-direction justify-center align-center">
+		<image src="../../images/none.svg"></image>
+		<view class="margin-top text-red text-bold text-xxl">没有数据</view>
+	</view>
+	<view wx:for="{{dayTaskList}}" wx:for-item="dayTaskItem" wx:for-index="dayTaskIndex" wx:key="day" class="cu-timeline padding-bottom-sm">
+		<view class="cu-time">{{dayTaskItem.day.month < 10? "0"+dayTaskItem.day.month : dayTaskItem.day.month}}-{{dayTaskItem.day.day < 10? "0"+dayTaskItem.day.day : dayTaskItem.day.day}}</view>
+		<block wx:for="{{dayTaskItem.tasks}}" wx:for-item="taskItem" wx:for-index="taskIndex" wx:key="finishTime">
+			<view class="cu-item text-{{taskItem.taskColor}}">
+				<view class="content">
+					<view class="cu-capsule radius align-center">
+						<view class="cu-tag bg-{{taskItem.taskColor}}">{{taskItem.finishTime.hour <= 12? "上午":"下午"}}</view>
+						<view class="cu-tag line-{{taskItem.taskColor}}">{{taskItem.finishTime.hour < 10? "0"+taskItem.finishTime.hour : taskItem.finishTime.hour > 12? taskItem.finishTime.hour-12 : taskItem.finishTime.hour}}:{{taskItem.finishTime.minute < 10? "0"+taskItem.finishTime.minute : taskItem.finishTime.minute}}</view>
+						<view class="margin-left-sm text-sm text-{{taskItem.taskColor}}">{{taskItem.taskName}}</view>
+					</view>
+					<view wx:if="{{taskItem.taskDetail}}" class="margin-top text-sm">{{taskItem.taskDetail}}</view>
 				</view>
-				<view wx:if="{{item.taskDetail}}" class="margin-top text-sm">{{item.taskDetail}}</view>
 			</view>
-		</view>
+		</block>
 	</view>
 </view>
