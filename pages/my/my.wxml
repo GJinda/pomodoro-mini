@@ -1,18 +1,72 @@
-<!--pages/my/my.wxml-->
-<view class="userinfo">
-	<button wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+<view class="userinfo shadow-warp">
+	<button class="cu-btn line-white text-red" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 	<block wx:else>
 		<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-		<text class="userinfo-nickname">{{userInfo.nickName}}</text>
+		<text class="text-white">{{userInfo.nickName}}</text>
 	</block>
 </view>
-<view class="grid col-3 padding-sm">
+<!-- <view class="grid col-3 padding-sm">
 	<view class="padding-sm" wx:for="{{colorList}}" wx:key="color">
 		<view class="padding radius text-center bg-{{item.name}}">
-			<!-- <view class="text-lg">{{item.title}}</view> -->
-			<view class="text-lg">{{" "}}</view>
-			<!-- <view class="margin-top-sm text-Abc">{{item.name}}</view> -->
-			<view class="margin-top-sm text-Abc">{{" "}}</view>
+		</view>
+	</view>
+</view> -->
+<view class="cu-list menu card-menu margin-top-lg margin-bottom-lg">
+	<view class="cu-item" bindtap="toggle">
+		<view class="content">
+			<text class="cuIcon-countdownfill text-red"></text>
+			<text class="text-grey">番茄工作法介绍</text>
+		</view>
+	</view>
+	<view wx:if="{{isShow}}" class="cu-item">
+		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7" class='text-content text-grey'>
+			<view>
+				<text class="cuIcon-title"></text>
+				每天设定要完成的任务，将任务写在列表里
+			</view>
+			<view class='margin-top-sm'>
+				<text class="cuIcon-title"></text>
+				设定你的番茄钟，推荐25分钟
+			</view>
+			<view class='margin-top-sm'>
+				<text class="cuIcon-title"></text>
+				每使用一次番茄，休息5分钟，每使用四次可休息25分钟
+			</view>
+			<view class='margin-top-sm'>
+				<text class="cuIcon-title"></text>
+				Tips: 番茄的数量不能决定任务成败
+			</view>
+			<!-- <view class='margin-top-sm'>更多功能敬请期待！</view> -->
+		</view>
+	</view>
+	<view class="cu-item">
+		<button class="cu-btn content" open-type="share">
+			<text style="opacity:0.8" class="cuIcon-forwardfill text-blue"></text>
+			<text style="font-weight:normal" class="text-grey">转发小程序</text>
+		</button>
+	</view>
+	<view class="cu-item">
+		<button class="cu-btn content" open-type="feedback">
+			<text style="opacity:0.8" class="cuIcon-writefill text-cyan"></text>
+			<text style="font-weight:normal" class="text-grey">意见反馈</text>
+		</button>
+	</view>
+	<view class="cu-item" bindtap="toggle">
+		<view class="content">
+			<text style="opacity:0.8" class="cuIcon-infofill text-grey"></text>
+			<text class="text-grey" bindtap="toggle">关于</text>
+		</view>
+	</view>
+	<view wx:if="{{!isShow}}" class="cu-item">
+		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7" class='text-content text-grey'>
+			<view>
+				Hi~ 欢迎使用
+				<text class="text-bold text-red">mini番茄钟~</text>
+			</view>
+			<view class='margin-top-sm'>这是我个人开发的一款番茄闹钟小程序。</view>
+			<view class='margin-top-sm'>如果这个项目帮到了你，或者你觉得很赞，可以推荐给朋友使用。</view>
+			<view class='margin-top-sm'>更多功能敬请期待！</view>
+			<!-- <view class='margin-top-sm'>更多功能敬请期待！</view> -->
 		</view>
 	</view>
 </view>

@@ -53,16 +53,28 @@
 
 	<view class="cu-list task-list menu xs-border {{taskList.length<3?'margin-lg':'margin'}} {{menuBorder?'sm-border':''}} {{menuCard?'card-menu margin-top':''}}">
 		<view wx:for="{{taskList}}" wx:key="taskName" style="padding:0 90rpx;" class="cu-item {{menuArrow?'arrow':''}}">
-			<view class="content margin-0 flex justify-between align-center" data-task-name="{{item.taskName}}" data-task-detail="{{item.taskDetail}}" bindtap="toTimer">
-				<view class="content">
+			<view class="content margin-0 flex justify-between align-center">
+				<view class="content" data-task-name="{{item.taskName}}" data-task-detail="{{item.taskDetail}}" bindtap="toTimer">
 					<text class="cuIcon-title text-red"></text>
 					<text style="color:#999">{{item.taskName}}</text>
 				</view>
 				<view class="flex">
 					<!-- <view wx:for="{{item.taskTomato}}">·</view> -->
 					<view wx:if="{{item.finished}}" class="cuIcon-roundcheck text-red"></view>
+					<view class="cuIcon-delete padding-sm text-red" bindtap="showDeleteModal" data-delete-index="{{index}}" data-target="deleteModal"></view>
 				</view>
 			</view>
+		</view>
+	</view>
+	<view class="cu-modal {{modalName=='deleteModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:500rpx" class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:280rpx">
+				<view style="padding:90rpx" class="bg-white flex justify-center align-center text-black text-bold">确定要删除吗？</view>
+				<view style="padding-bottom:40rpx" class="bg-white flex justify-center align-center">
+					<button style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round" bindtap="cancel">取消</button>
+					<button style="width:160rpx; font-weight:normal; margin:0" class="cu-btn bg-red round" bindtap="deleteTask" data-index="{{index}}">确定</button>
+				</view>
+			</scroll-view>
 		</view>
 	</view>
 </view>

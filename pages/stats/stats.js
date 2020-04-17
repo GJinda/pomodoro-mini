@@ -16,11 +16,11 @@ Page({
       key: 'finishTask',
       success: (res) => {
         console.log(JSON.parse(res.data))
+        let finishTaskList = JSON.parse(res.data).reverse()
         this.setData({
-          finishTaskList: JSON.parse(res.data)
+          finishTaskList: finishTaskList
         })
         //set days
-        let finishTaskList = JSON.parse(res.data)
         for (let i in finishTaskList) {
           let dayObj = {
             year: finishTaskList[i].finishTime.year,

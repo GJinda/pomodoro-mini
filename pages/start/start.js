@@ -41,6 +41,7 @@ Page({
     tomatoTimeIndex: 2,
     tomatoTimeList: ["1分钟", "10分钟", "15分钟", "25分钟", "30分钟", "45分钟", "60分钟"],
     modalName: null,
+    deleteIndex: -1,
     taskName: "",
     taskDetail: "",
     taskTomato: 1,
@@ -104,6 +105,25 @@ Page({
     this.setData({
       taskList: this.data.taskList.concat(newTaskArr)
     })
+    this.hideModal()
+  },
+  showDeleteModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target,
+      deleteIndex: e.currentTarget.dataset.deleteIndex
+    })
+  },
+  deleteTask() {
+    let taskList = this.data.taskList
+    let deleteIndex = this.data.deleteIndex
+    for (let i in taskList) {
+      if (i == deleteIndex) {
+        taskList.splice(i, 1)
+        this.setData({
+          taskList: taskList
+        })
+      }
+    }
     this.hideModal()
   },
   taskNameInput(e) {
