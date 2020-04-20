@@ -19,6 +19,24 @@ Page({
       url: '../start/start'
     })
   },
+  onShareAppMessage() {
+    return {
+      title: "要来点番茄嘛？",
+      imageUrl: "../../images/share.png",
+      success: (res) => {
+        console.log(res)
+        wx.showShareMenu({
+          withShareTicker: true,
+          complete: (res) => {
+            console.log(res)
+          },
+        })
+      },
+      fail: (res) => {
+        console.log(res.errMsg)
+      }
+    }
+  },
   onLoad: function () {
     if (app.globalData.userInfo) {
       this.setData({
@@ -55,10 +73,12 @@ Page({
   },
   getUserInfo: function (e) {
     console.log(e)
-    app.globalData.userInfo = e.detail.userInfo
-    this.setData({
-      userInfo: e.detail.userInfo,
-      hasUserInfo: true
-    })
+    if (e.detail.userInfo) {
+      app.globalData.userInfo = e.detail.userInfo
+      this.setData({
+        userInfo: e.detail.userInfo,
+        hasUserInfo: true
+      })
+    }
   }
 })

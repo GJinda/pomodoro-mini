@@ -37,15 +37,19 @@ Page({
     }],
     gridCol: 3,
     skin: false,
+
     tomatoTime: "25分钟",
     tomatoTimeIndex: 2,
     tomatoTimeList: ["1分钟", "10分钟", "15分钟", "25分钟", "30分钟", "45分钟", "60分钟"],
-    modalName: null,
-    deleteIndex: -1,
+
     taskName: "",
     taskDetail: "",
+    taskColor: "red",
     taskTomato: 1,
-    taskList: []
+    taskList: [],
+
+    modalName: null,
+    deleteIndex: -1
   },
   tomatoTimePickerChange(e) {
     this.setData({
@@ -58,8 +62,23 @@ Page({
       url: '../timer/timer?params=' + JSON.stringify({
         tomatoTime: this.data.tomatoTime,
         taskName: e.currentTarget.dataset.taskName,
-        taskDetail: e.currentTarget.dataset.taskDetail
+        taskDetail: e.currentTarget.dataset.taskDetail,
+        taskColor: e.currentTarget.dataset.taskColor
       })
+    })
+  },
+  onShow() {
+    wx.getStorage({
+      key: 'myTask',
+      success: (res) => {
+        console.log(JSON.parse(res.data))
+        this.setData({
+          taskList: JSON.parse(res.data)
+        })
+      },
+      fail: (res) => {
+        console.log(res.errMsg)
+      }
     })
   },
   showModal(e) {
@@ -76,6 +95,7 @@ Page({
     this.setData({
       taskName: "",
       taskDetail: "",
+      taskColor: "red",
       taskTomato: 0
     })
     this.hideModal()
@@ -97,13 +117,17 @@ Page({
     let newTaskArr = [{
       taskName: this.data.taskName,
       taskDetail: this.data.taskDetail,
-      color: "",
+      taskColor: "red",
       taskTomato: this.data.taskTomato,
       finished: false,
       finishTime: ""
     }]
     this.setData({
       taskList: this.data.taskList.concat(newTaskArr)
+    })
+    wx.setStorage({
+      data: JSON.stringify(this.data.taskList),
+      key: "myTask",
     })
     this.hideModal()
   },
@@ -124,6 +148,10 @@ Page({
         })
       }
     }
+    wx.setStorage({
+      data: JSON.stringify(this.data.taskList),
+      key: "myTask",
+    })
     this.hideModal()
   },
   taskNameInput(e) {

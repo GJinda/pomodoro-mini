@@ -1,5 +1,5 @@
 <view class="userinfo shadow-warp">
-	<button class="cu-btn line-white text-red" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
+	<button style="width:240rpx" class="cu-btn line-white text-red" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 	<block wx:else>
 		<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
 		<text class="text-white">{{userInfo.nickName}}</text>
@@ -40,21 +40,21 @@
 		</view>
 	</view>
 	<view class="cu-item">
-		<button class="cu-btn content" open-type="share">
-			<text style="opacity:0.8" class="cuIcon-forwardfill text-blue"></text>
-			<text style="font-weight:normal" class="text-grey">转发小程序</text>
-		</button>
-	</view>
-	<view class="cu-item">
 		<button class="cu-btn content" open-type="feedback">
 			<text style="opacity:0.8" class="cuIcon-writefill text-cyan"></text>
 			<text style="font-weight:normal" class="text-grey">意见反馈</text>
 		</button>
 	</view>
+	<view class="cu-item">
+		<button class="cu-btn content" open-type="share" bindtap="onShareAppMessage">
+			<text style="opacity:0.8" class="cuIcon-forwardfill text-blue"></text>
+			<text style="font-weight:normal" class="text-grey">分享</text>
+		</button>
+	</view>
 	<view class="cu-item" bindtap="toggle">
 		<view class="content">
 			<text style="opacity:0.8" class="cuIcon-infofill text-grey"></text>
-			<text class="text-grey" bindtap="toggle">关于</text>
+			<text class="text-grey">关于</text>
 		</view>
 	</view>
 	<view wx:if="{{!isShow}}" class="cu-item">
