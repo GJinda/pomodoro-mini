@@ -88,6 +88,12 @@ Page({
       },
       fail: (res) => {
         console.log(res.errMsg)
+        setTimeout(() => {
+          wx.hideLoading()
+        }, 200);
+        this.setData({
+          isLoading: false
+        })
       }
     })
   },
