@@ -18,16 +18,14 @@ Page({
   },
   onLoad(options) {
     wx.hideHomeButton({
-      complete: (res) => {
-        console.log(res)
-      },
+      complete: (res) => {},
     })
     console.log(options)
     let params = JSON.parse(options.params)
     this.setData({
       tomatoTime: parseInt(params.tomatoTime),
-      time: parseInt(params.tomatoTime),
-      halfTime: parseInt(params.tomatoTime) / 2,
+      time: parseInt(params.tomatoTime) * 60,
+      halfTime: parseInt(params.tomatoTime) * 60 / 2,
       taskName: params.taskName || "",
       taskDetail: params.taskDetail || "",
       taskColor: params.taskColor || "red"
@@ -54,13 +52,10 @@ Page({
         })
         wx.getStorage({
           key: 'finishTask',
-          success: (res) => {
-            console.log("add finish task", JSON.parse(res.data))
-          }
+          success: (res) => {}
         })
       },
       fail: (res) => {
-        console.log(res.errMsg)
         let newTaskList = [obj]
         wx.setStorage({
           data: JSON.stringify([].concat(newTaskList)),
@@ -68,9 +63,7 @@ Page({
         })
         wx.getStorage({
           key: 'finishTask',
-          success: (res) => {
-            console.log("add finish task", JSON.parse(res.data))
-          }
+          success: (res) => {}
         })
       }
     })
@@ -85,7 +78,6 @@ Page({
       minute: date.getMinutes(),
       second: date.getSeconds(),
     }
-    console.log(dateObj)
     return dateObj
   },
   startTimer() {
@@ -164,9 +156,7 @@ Page({
   },
   toStart() {
     wx.navigateBack({
-      complete: (res) => {
-        console.log(res)
-      },
+      complete: (res) => {},
     })
     // wx.navigateTo({
     //   url: "../start/start",

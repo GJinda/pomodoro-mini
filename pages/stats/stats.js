@@ -20,7 +20,6 @@ Page({
     wx.getStorage({
       key: 'finishTask',
       success: (res) => {
-        console.log(JSON.parse(res.data))
         let finishTaskList = JSON.parse(res.data).reverse()
         this.setData({
           finishTaskList: finishTaskList
@@ -64,8 +63,6 @@ Page({
             dayTaskList: this.data.dayTaskList.concat(dayTaskArr)
           })
         }
-        console.log(this.data.days)
-        console.log(this.data.dayTaskList)
         //set total
         this.setData({
           total: this.data.finishTaskList.length
@@ -87,7 +84,6 @@ Page({
         })
       },
       fail: (res) => {
-        console.log(res.errMsg)
         setTimeout(() => {
           wx.hideLoading()
         }, 200);

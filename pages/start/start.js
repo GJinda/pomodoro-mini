@@ -40,7 +40,7 @@ Page({
 
     tomatoTime: "25分钟",
     tomatoTimeIndex: 2,
-    tomatoTimeList: ["1分钟", "10分钟", "15分钟", "25分钟", "30分钟", "45分钟", "60分钟"],
+    tomatoTimeList: ["10分钟", "15分钟", "25分钟", "30分钟", "45分钟", "60分钟"],
 
     taskName: "",
     taskDetail: "",
@@ -71,14 +71,11 @@ Page({
     wx.getStorage({
       key: 'myTask',
       success: (res) => {
-        console.log(JSON.parse(res.data))
         this.setData({
           taskList: JSON.parse(res.data)
         })
       },
-      fail: (res) => {
-        console.log(res.errMsg)
-      }
+      fail: (res) => {}
     })
   },
   showModal(e) {
