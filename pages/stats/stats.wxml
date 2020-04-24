@@ -11,7 +11,7 @@
 	</view>
 	<view hidden="{{isLoading || dayTaskList.length}}" class="none-wrapper flex flex-direction justify-center align-center">
 		<image src="../../images/none.svg"></image>
-		<view class="margin-top text-red text-bold text-xxl">没有数据</view>
+		<view class="margin-top text-red">暂无数据</view>
 	</view>
 	<view wx:for="{{dayTaskList}}" wx:for-item="dayTaskItem" wx:for-index="dayTaskIndex" wx:key="dayTaskIndex" class="cu-timeline padding-bottom-sm">
 		<view class="cu-time">{{dayTaskItem.day.month < 10? "0"+dayTaskItem.day.month : dayTaskItem.day.month}}-{{dayTaskItem.day.day < 10? "0"+dayTaskItem.day.day : dayTaskItem.day.day}}</view>

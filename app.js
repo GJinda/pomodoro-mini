@@ -38,16 +38,53 @@ App({
         this.globalData.StatusBar = e.statusBarHeight;
         let capsule = wx.getMenuButtonBoundingClientRect();
         if (capsule) {
-         	this.globalData.Custom = capsule;
-        	this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
+          this.globalData.Custom = capsule;
+          this.globalData.CustomBar = capsule.bottom + capsule.top - e.statusBarHeight;
         } else {
-        	this.globalData.CustomBar = e.statusBarHeight + 50;
+          this.globalData.CustomBar = e.statusBarHeight + 50;
         }
       }
     })
   },
   globalData: {
     userInfo: null,
+    iconList: [{
+      icon: 'file',
+      color: 'red',
+      name: '工作'
+    }, {
+      icon: 'read',
+      color: 'orange',
+      name: '学习'
+    }, {
+      icon: 'write',
+      color: 'yellow',
+      name: '写作'
+    }, {
+      icon: 'magic',
+      color: 'olive',
+      name: '背词'
+    }, {
+      icon: 'text',
+      color: 'green',
+      name: '阅读'
+    }, {
+      icon: 'comment',
+      color: 'cyan',
+      name: '讨论'
+    }, {
+      icon: 'hot',
+      color: 'blue',
+      name: '运动'
+    }, {
+      icon: 'creative',
+      color: 'mauve',
+      name: '思考'
+    }, {
+      icon: 'light',
+      color: 'purple',
+      name: '脑暴'
+    }],
     colorList: [{
         title: '嫣红',
         name: 'red',

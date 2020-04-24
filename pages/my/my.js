@@ -3,20 +3,20 @@ const app = getApp()
 Page({
   data: {
     colorList: app.globalData.colorList,
-    isShow: true,
+    showIntro: true,
+    showAbout: false,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  toggle() {
+  toggleIntro() {
     this.setData({
-      isShow: !this.data.isShow
+      showIntro: !this.data.showIntro
     })
   },
-  //事件处理函数
-  bindViewTap: function () {
-    wx.navigateTo({
-      url: '../start/start'
+  toggleAbout() {
+    this.setData({
+      showAbout: !this.data.showAbout
     })
   },
   onShareAppMessage() {

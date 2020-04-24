@@ -9,6 +9,6 @@
   padding: 70rpx 80rpx 30rpx;
 }
 .none-wrapper{
-  height: 450rpx;
-  transform: scale(0.6)
+  height: 200rpx;
+  margin: 60rpx;
 }

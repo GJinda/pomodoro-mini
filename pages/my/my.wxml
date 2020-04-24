@@ -1,7 +1,7 @@
 <view class="userinfo shadow-warp">
 	<button style="width:240rpx" class="cu-btn line-white text-red" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 	<block wx:else>
-		<image bindtap="bindViewTap" class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+		<image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
 		<text class="text-white">{{userInfo.nickName}}</text>
 	</block>
 </view>
@@ -12,31 +12,26 @@
 	</view>
 </view> -->
 <view class="cu-list menu card-menu margin-top-lg margin-bottom-lg">
-	<view class="cu-item" bindtap="toggle">
+	<view class="cu-item" bindtap="toggleIntro">
 		<view class="content">
 			<text class="cuIcon-countdownfill text-red"></text>
 			<text class="text-grey">番茄工作法介绍</text>
 		</view>
 	</view>
-	<view wx:if="{{isShow}}" class="cu-item">
+	<view wx:if="{{showIntro}}" class="cu-item">
 		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7" class='text-content text-grey'>
 			<view>
-				<text class="cuIcon-title"></text>
-				每天设定要完成的任务，将任务写在列表里
-			</view>
-			<view class='margin-top-sm'>
-				<text class="cuIcon-title"></text>
+				<!-- <text class="cuIcon-title"></text> -->
 				设定你的番茄钟，推荐25分钟
 			</view>
 			<view class='margin-top-sm'>
-				<text class="cuIcon-title"></text>
+				<!-- <text class="cuIcon-title"></text> -->
 				每使用一次番茄，休息5分钟，每使用四次可休息25分钟
 			</view>
 			<view class='margin-top-sm'>
-				<text class="cuIcon-title"></text>
-				Tips: 番茄的数量不能决定任务成败
+				<!-- <text class="cuIcon-title"></text> -->
+				Tip: 番茄的数量不能决定任务成败；个人番茄数据不要拿来相互比较
 			</view>
-			<!-- <view class='margin-top-sm'>更多功能敬请期待！</view> -->
 		</view>
 	</view>
 	<view class="cu-item">
@@ -51,13 +46,13 @@
 			<text style="font-weight:normal" class="text-grey">分享</text>
 		</button>
 	</view>
-	<view class="cu-item" bindtap="toggle">
+	<view class="cu-item" bindtap="toggleAbout">
 		<view class="content">
 			<text style="opacity:0.8" class="cuIcon-infofill text-grey"></text>
 			<text class="text-grey">关于</text>
 		</view>
 	</view>
-	<view wx:if="{{!isShow}}" class="cu-item">
+	<view wx:if="{{showAbout}}" class="cu-item">
 		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7" class='text-content text-grey'>
 			<view>
 				Hi~ 欢迎使用
@@ -66,7 +61,6 @@
 			<view class='margin-top-sm'>这是我个人开发的一款番茄闹钟小程序。</view>
 			<view class='margin-top-sm'>如果这个项目帮到了你，或者你觉得很赞，可以推荐给朋友使用。</view>
 			<view class='margin-top-sm'>更多功能敬请期待！</view>
-			<!-- <view class='margin-top-sm'>更多功能敬请期待！</view> -->
 		</view>
 	</view>
 </view>
