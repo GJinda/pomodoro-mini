@@ -12,3 +12,7 @@
   height: 200rpx;
   margin: 60rpx;
 }
+.animation-fade{
+  animation-duration: .2s;
+  animation-timing-function: ease-in-out
+}

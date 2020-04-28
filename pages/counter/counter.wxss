@@ -1,0 +1,145 @@
+.box {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.circle-wrapper {
+  width: 400rpx;
+  height: 400rpx;
+  position: relative;
+  margin-bottom: 160rpx;
+}
+
+.emoji {
+  font-size: 400rpx;
+  margin-bottom: 180rpx;
+  margin-top: -20rpx;
+}
+
+.time-text {
+  font-size: 70rpx;
+  font-weight: bold;
+  line-height: 400rpx;
+  text-align: center;
+}
+
+.line-circle {
+  width: 400rpx;
+  height: 400rpx;
+  border: 10rpx solid #fff;
+  opacity: 0.5;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
+  border-radius: 50%;
+}
+
+.line-circle.large {
+  width: 500rpx;
+  height: 500rpx;
+  border: 5rpx solid #fff;
+  opacity: 0.2;
+}
+
+.wrapper {
+  width: 200rpx;
+  height: 400rpx;
+  position: absolute;
+  top: 0;
+  overflow: hidden;
+}
+
+.right {
+  right: 0;
+}
+
+.left {
+  left: 0;
+}
+
+.circle {
+  width: 400rpx;
+  height: 400rpx;
+  border: 10rpx solid transparent;
+  border-radius: 50%;
+  position: absolute;
+  top: 0;
+  transform: rotate(45deg);
+}
+
+.right-circle-white {
+  right: -100%;
+  border-top: 10rpx solid #fff;
+  border-right: 10rpx solid #fff;
+}
+
+.left-circle-white {
+  left: -100%;
+  border-bottom: 10rpx solid #fff;
+  border-left: 10rpx solid #fff;
+}
+
+.right-circle-red {
+  right: -100%;
+  border-top: 4rpx solid #e54d42;
+  border-right: 4rpx solid #e54d42;
+}
+
+.left-circle-red {
+  left: -100%;
+  border-bottom: 4rpx solid #e54d42;
+  border-left: 4rpx solid #e54d42;
+}
+
+
+.right-circle-orange {
+  right: -100%;
+  border-top: 4px solid #f37b1d;
+  border-right: 4px solid #f37b1d;
+}
+
+.left-circle-orange {
+  left: -100%;
+  border-bottom: 4px solid #f37b1d;
+  border-left: 4px solid #f37b1d;
+}
+
+.right-circle-yellow {
+  right: -100%;
+  border-top: 4px solid #fbbd08;
+  border-right: 4px solid #fbbd08;
+}
+
+.left-circle-yellow {
+  left: -100%;
+  border-bottom: 4px solid #fbbd08;
+  border-left: 4px solid #fbbd08;
+}
+
+.right-circle-cyan {
+  right: -100%;
+  border-top: 4px solid #1cbbb4;
+  border-right: 4px solid #1cbbb4;
+}
+
+.left-circle-cyan {
+  left: -100%;
+  border-bottom: 4px solid #1cbbb4;
+  border-left: 4px solid #1cbbb4;
+}
+
+.right-circle-olive {
+  right: -100%;
+  border-top: 4px solid #8dc63f;
+  border-right: 4px solid #8dc63f;
+}
+
+.left-circle-olive {
+  left: -100%;
+  border-bottom: 4px solid #8dc63f;
+  border-left: 4px solid #8dc63f;
+}

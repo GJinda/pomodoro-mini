@@ -27,6 +27,9 @@ App({
               if (this.userInfoReadyCallback) {
                 this.userInfoReadyCallback(res)
               }
+              wx.showToast({
+                title: '登录成功 !',
+              })
             }
           })
         }
@@ -45,9 +48,27 @@ App({
         }
       }
     })
+    //获取设置信息
+    wx.getStorage({
+      key: 'config',
+      success: (res) => {
+        this.globalData.config = JSON.parse(res.data)
+        console.log("global",this.globalData.config)
+      },
+      fail: (res) => {
+        wx.setStorage({
+          data: JSON.stringify(this.globalData.config),
+          key: 'config',
+        })
+      }
+    })
   },
   globalData: {
     userInfo: null,
+    config: {
+      isKeepScreen: false,
+      isForwardTiming: false,
+    },
     iconList: [{
       icon: 'file',
       color: 'red',

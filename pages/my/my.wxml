@@ -46,6 +46,47 @@
 			<text style="font-weight:normal" class="text-grey">分享</text>
 		</button>
 	</view>
+	<view class="cu-item" bindtap="toggleSetting">
+		<view class="content">
+			<text style="opacity:0.8; color:#666" class="cuIcon-settingsfill"></text>
+			<text class="text-grey">设置</text>
+		</view>
+	</view>
+	<view class="cu-modal {{modalName=='resetModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:500rpx" class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:240rpx">
+				<view style="padding:90rpx 60rpx" class="bg-white flex justify-center align-center text-black text-bold">确定要重置吗？此操作不可逆</view>
+				<view style="padding-bottom:40rpx" class="bg-white flex justify-center align-center">
+					<button style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round" bindtap="cancel">取消</button>
+					<button style="width:160rpx; font-weight:normal; margin:0" class="cu-btn bg-red round" bindtap="resetTask">确定</button>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view wx:if="{{showSetting}}" class="cu-item">
+		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7; width:100%" class='text-content text-grey'>
+			<view class="flex justify-between">
+				<view>屏幕常亮</view>
+				<view>
+					<switch class="red" checked="{{isKeepScreen}}" bindchange="onSwitchScreen"></switch>
+				</view>
+			</view>
+			<view class="flex justify-between margin-top">
+				<view>计时模式</view>
+				<view class="flex">
+					<view wx:if="{{isForwardTiming}}" class="margin-right-sm">正向</view>
+					<view wx:else class="margin-right-sm">反向</view>
+					<switch class="red" checked="{{isForwardTiming}}" bindchange="onSwitchTiming"></switch>
+				</view>
+			</view>
+			<view class="flex justify-between margin-top">
+				<view>重置任务名称</view>
+				<view class="flex">
+					<switch class="red" checked="{{isResetTask}}" bindchange="onSwitchReset"></switch>
+				</view>
+			</view>
+		</view>
+	</view>
 	<view class="cu-item" bindtap="toggleAbout">
 		<view class="content">
 			<text style="opacity:0.8" class="cuIcon-infofill text-grey"></text>

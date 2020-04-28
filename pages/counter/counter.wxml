@@ -1,0 +1,58 @@
+<view class="box bg-red">
+	<view wx:if="{{timer}}" class="circle-wrapper">
+		<view class="{{timer?'animation-scale-down':'animation-scale-down animation-reverse'}} time-text">{{timeStr}}</view>
+		<view class="line-circle"></view>
+		<view hidden="{{!timer}}" class="line-circle large"></view>
+		<view class="right wrapper">
+			<view style="transform:rotate({{leftDeg}}deg)" class="circle left-circle-white"></view>
+		</view>
+		<view class="left wrapper">
+			<view style="transform:rotate({{rightDeg}}deg)" class="circle right-circle-white"></view>
+		</view>
+	</view>
+	<view wx:else class="{{timer?'animation-scale-down animation-reverse':'animation-scale-down'}} emoji cuIcon-emoji circle-wrapper"></view>
+
+	<button hidden="{{time<maxTime}}" style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn bg-white text-red round margin-sm" bindtap="startNewTimer">重新计时</button>
+	<button hidden="{{time<maxTime}}" style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn line-white round margin-sm" bindtap="toStart">返回</button>
+	<button hidden="{{time>=maxTime}}" style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn bg-white text-red round margin-sm" bindtap="showModal" data-target="finishModal">任务已完成</button>
+	<button hidden="{{time>=maxTime||timer}}" style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn bg-white text-red round margin-sm" bindtap="startTimer">继续</button>
+	<button hidden="{{time>=maxTime||!timer}}" style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn line-white round margin-sm" bindtap="clearTimer">暂停</button>
+	<button hidden="{{time>=maxTime}}" style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn line-white round margin-sm" bindtap="showModal" data-target="giveupModal">放弃</button>
+
+	<view class="cu-modal {{modalName=='giveupModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:500rpx" class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:280rpx">
+				<view style="padding:90rpx" class="bg-white flex justify-center align-center text-black text-bold">确定要放弃吗？</view>
+				<view style="padding-bottom:40rpx" class="bg-white flex justify-center align-center">
+					<button style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round" bindtap="cancel">取消</button>
+					<button style="width:160rpx; font-weight:normal; margin:0" class="cu-btn bg-red round" bindtap="giveup">确定</button>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="cu-modal {{modalName=='finishModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:500rpx" class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:280rpx">
+				<view style="padding:90rpx" class="bg-white flex justify-center align-center text-black text-bold">确认你的任务已完成？</view>
+				<view style="padding-bottom:40rpx" class="bg-white flex justify-center align-center">
+					<button style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round" bindtap="cancel">取消</button>
+					<button style="width:160rpx; font-weight:normal; margin:0" class="cu-btn bg-red round" bindtap="finish">确认</button>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+	<view class="cu-modal {{modalName=='hintModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:500rpx" class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:280rpx">
+				<view style="padding:60rpx 90rpx 30rpx 90rpx" class="bg-white flex flex-direction justify-center align-center text-black">
+					<view style="font-size:180rpx" class="cuIcon-warn text-red margin-bottom"></view>
+          <view style="color:#666; line-height:1.5">{{hintText}}</view>
+          <view style="color:#666; line-height:1.5" class="margin-top-sm">{{hintText2}}</view>
+				</view>
+				<view style="padding-bottom:60rpx" class="bg-white flex justify-center align-center">
+					<button style="width:160rpx; font-weight:normal; margin:0" class="cu-btn line-red round" bindtap="cancel">关闭</button>
+				</view>
+			</scroll-view>
+		</view>
+	</view>
+</view>

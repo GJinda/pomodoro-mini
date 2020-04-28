@@ -16,14 +16,14 @@
 	<view wx:for="{{dayTaskList}}" wx:for-item="dayTaskItem" wx:for-index="dayTaskIndex" wx:key="dayTaskIndex" class="cu-timeline padding-bottom-sm">
 		<view class="cu-time">{{dayTaskItem.day.month < 10? "0"+dayTaskItem.day.month : dayTaskItem.day.month}}-{{dayTaskItem.day.day < 10? "0"+dayTaskItem.day.day : dayTaskItem.day.day}}</view>
 		<block wx:for="{{dayTaskItem.tasks}}" wx:for-item="taskItem" wx:for-index="taskIndex" wx:key="taskIndex">
-			<view class="cu-item text-{{taskItem.taskColor}}">
+			<view style="animation-delay: {{dayTaskIndex>0?dayTaskList[dayTaskIndex-1].tasks.length*0.1+taskIndex*0.1:taskIndex*0.1}}s;" class="animation-fade cu-item text-{{taskItem.taskColor}}">
 				<view class="content">
 					<view class="cu-capsule radius align-center">
 						<view class="cu-tag bg-{{taskItem.taskColor}} text-white">{{taskItem.finishTime.hour <= 12? "上午":"下午"}}</view>
 						<view class="cu-tag line-{{taskItem.taskColor}}">{{taskItem.finishTime.hour < 10? "0"+taskItem.finishTime.hour : taskItem.finishTime.hour > 12? taskItem.finishTime.hour-12 : taskItem.finishTime.hour}}:{{taskItem.finishTime.minute < 10? "0"+taskItem.finishTime.minute : taskItem.finishTime.minute}}</view>
 						<view class="margin-left-sm text-sm text-{{taskItem.taskColor}}">{{taskItem.taskName}}</view>
 					</view>
-					<view wx:if="{{taskItem.taskDetail}}" class="margin-top text-sm">{{taskItem.taskDetail}}</view>
+					<view wx:if="{{taskItem.taskDetail}}" class="margin-top text-sm text-{{taskItem.taskColor}}">{{taskItem.taskDetail}}</view>
 				</view>
 			</view>
 		</block>

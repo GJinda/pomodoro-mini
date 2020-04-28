@@ -1,5 +1,13 @@
 <view class="box">
-	<view class="bg-white flex flex-direction align-center">
+	<view wx:if="{{isForwardTiming}}" class="animation-fade bg-white flex flex-direction align-center">
+		<view class="margin-sm text-xl text-bold">选择一项任务</view>
+		<view class="margin-sm flex align-center">
+			<text style="margin-right:20rpx" class="cu-btn bg-red round">从零开始</text>
+			计时，专注完成任务
+		</view>
+	</view>
+
+	<view wx:else class="animation-fade bg-white flex flex-direction align-center">
 		<view class="margin-sm text-xl text-bold">选择一项任务</view>
 		<view class="margin-sm flex align-center">
 			在接下来的
@@ -11,11 +19,34 @@
 	</view>
 
 	<view class="cu-list grid margin-lg col-{{gridCol}} {{gridBorder?'':'no-border'}}">
-		<view class="cu-item" wx:for="{{iconList}}" wx:key="name">
-			<view class="content" data-task-color="{{item.color}}" data-task-name="{{item.name}}" bindtap="toTimer">
+		<view class="cu-item" wx:for="{{iconList}}" wx:for-index="index" wx:key="index">
+			<view wx:if="{{isForwardTiming}}" class="content" data-task-color="{{item.color}}" data-task-name="{{item.name}}" data-task-index="{{index}}" data-target="editModal" bindlongpress="showModal" bindtap="toCounter">
 				<view class="cuIcon-{{item.icon}} text-{{item.color}}"></view>
-				<text style="color:#999">{{item.name}}</text>
+				<text style="color:#999; padding:0 30rpx">{{item.name}}</text>
 			</view>
+			<view wx:else class="content" data-task-color="{{item.color}}" data-task-name="{{item.name}}" data-task-index="{{index}}" data-target="editModal" bindlongpress="showModal" bindtap="toTimer">
+				<view class="cuIcon-{{item.icon}} text-{{item.color}}"></view>
+				<text style="color:#999; padding:0 30rpx">{{item.name}}</text>
+			</view>
+		</view>
+	</view>
+
+	<view class="cu-modal edit-modal {{modalName=='editModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:500rpx" class="cu-dialog" catchtap>
+			<scroll-view scroll-y style="min-height:280rpx">
+				<form bindsubmit="edit" bindreset="cancel">
+					<view class="cu-form-group flex justify-center align-center text-bold">
+						<view class="title">修改任务名称</view>
+					</view>
+					<view class="cu-form-group flex justify-center align-center">
+						<input name="taskName" bindinput="taskNameInput" placeholder="点击此处填写"></input>
+					</view>
+					<view style="padding:30rpx" class="cu-form-group flex justify-center align-center">
+						<button formType="reset" style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round">取消</button>
+						<button formType="submit" style="width:160rpx; font-weight:normal; margin:0" class="cu-btn bg-red round">确定</button>
+					</view>
+				</form>
+			</scroll-view>
 		</view>
 	</view>
 </view>

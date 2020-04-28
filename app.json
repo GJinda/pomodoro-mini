@@ -3,6 +3,7 @@
     "pages/start/start",
     "pages/stats/stats",
     "pages/my/my",
+    "pages/counter/counter",
     "pages/timer/timer",
     "pages/index/index",
     "pages/logs/logs"

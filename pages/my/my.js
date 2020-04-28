@@ -3,8 +3,15 @@ const app = getApp()
 Page({
   data: {
     colorList: app.globalData.colorList,
-    showIntro: true,
+    showIntro: false,
+    showSetting: false,
     showAbout: false,
+
+    isKeepScreen: false,
+    isForwardTiming: false,
+    isResetTask: false,
+
+    modalName: null,
     userInfo: {},
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
@@ -14,9 +21,46 @@ Page({
       showIntro: !this.data.showIntro
     })
   },
+  toggleSetting() {
+    this.setData({
+      showSetting: !this.data.showSetting
+    })
+  },
   toggleAbout() {
     this.setData({
       showAbout: !this.data.showAbout
+    })
+  },
+  onSwitchScreen(e) {
+    this.setData({
+      isKeepScreen: e.detail.value
+    })
+    let config = app.globalData.config
+    config.isKeepScreen = this.data.isKeepScreen
+    getApp().globalData.config = config
+    wx.setStorage({
+      data: JSON.stringify(config),
+      key: "config",
+    })
+  },
+  onSwitchTiming(e) {
+    this.setData({
+      isForwardTiming: e.detail.value
+    })
+    let config = app.globalData.config
+    config.isForwardTiming = this.data.isForwardTiming
+    getApp().globalData.config = config
+    wx.setStorage({
+      data: JSON.stringify(config),
+      key: "config",
+    })
+  },
+  onSwitchReset(e) {
+    this.setData({
+      isResetTask: e.detail.value
+    })
+    this.setData({
+      modalName: "resetModal"
     })
   },
   onShareAppMessage() {
@@ -36,6 +80,18 @@ Page({
         console.log(res.errMsg)
       }
     }
+  },
+  onShow() {
+    wx.getStorage({
+      key: 'config',
+      success: (res) => {
+        let config = JSON.parse(res.data)
+        this.setData({
+          isKeepScreen: config.isKeepScreen,
+          isForwardTiming: config.isForwardTiming
+        })
+      }
+    })
   },
   onLoad: function () {
     if (app.globalData.userInfo) {
@@ -80,5 +136,31 @@ Page({
         hasUserInfo: true
       })
     }
-  }
+  },
+  showModal(e) {
+    this.setData({
+      modalName: e.currentTarget.dataset.target
+    })
+  },
+  hideModal(e) {
+    this.setData({
+      isResetTask: false
+    })
+    this.setData({
+      modalName: null
+    })
+  },
+  cancel() {
+    this.hideModal()
+  },
+  resetTask(e) {
+    wx.setStorage({
+      data: JSON.stringify(app.globalData.iconList),
+      key: 'list',
+    })
+    wx.showToast({
+      title: '重置成功 !',
+    })
+    this.hideModal()
+  },
 })
