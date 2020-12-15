@@ -16,19 +16,30 @@ Page({
     hasUserInfo: false,
     canIUse: wx.canIUse('button.open-type.getUserInfo')
   },
-  toggleIntro() {
+  showIntroModal() {
     this.setData({
-      showIntro: !this.data.showIntro
+      modalName: "introModal"
     })
   },
-  toggleSetting() {
+  showLogModal() {
     this.setData({
-      showSetting: !this.data.showSetting
+      modalName: "logModal"
     })
   },
-  toggleAbout() {
+  showSettingModal() {
     this.setData({
-      showAbout: !this.data.showAbout
+      modalName: "settingModal"
+    })
+  },
+  showAboutModal() {
+    this.setData({
+      modalName: "aboutModal"
+    })
+  },
+  showReward() {
+    wx.previewImage({
+      current: 'https://i.loli.net/2020/12/15/4QhAfoDM9UzCqBa.png',
+      urls: ['https://i.loli.net/2020/12/15/4QhAfoDM9UzCqBa.png']
     })
   },
   onSwitchScreen(e) {
@@ -144,14 +155,16 @@ Page({
   },
   hideModal(e) {
     this.setData({
-      isResetTask: false
-    })
-    this.setData({
       modalName: null
     })
   },
-  cancel() {
-    this.hideModal()
+  cancelResetTask() {
+    this.setData({
+      isResetTask: false
+    })
+    this.setData({
+      modalName: "settingModal"
+    })
   },
   resetTask(e) {
     wx.setStorage({
@@ -160,6 +173,9 @@ Page({
     })
     wx.showToast({
       title: '重置成功 !',
+    })
+    this.setData({
+      isResetTask: false
     })
     this.hideModal()
   },

@@ -4,15 +4,34 @@
   display: flex;
   flex-direction: column;
 }
-.box > .dashboard .today,
-.box > .dashboard .total{
+
+.box>.dashboard .today,
+.box>.dashboard .total {
   padding: 70rpx 80rpx 30rpx;
 }
-.none-wrapper{
-  height: 200rpx;
+
+.none-wrapper {
+  height: 250rpx;
   margin: 60rpx;
 }
-.animation-fade{
+
+.animation-fade {
   animation-duration: .2s;
   animation-timing-function: ease-in-out
+}
+
+.animation-shake {
+  animation-name: "shake";
+  animation-duration: .2s;
+  animation-timing-function: ease-in-out;
+}
+
+@keyframes shake {
+  50% {
+    transform: scale(1.05);
+  }
+
+  100% {
+    transform: scale(1.0);
+  }
 }

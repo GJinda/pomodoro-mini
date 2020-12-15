@@ -21,11 +21,11 @@
 	<view class="cu-list grid margin-lg col-{{gridCol}} {{gridBorder?'':'no-border'}}">
 		<view class="cu-item" wx:for="{{iconList}}" wx:for-index="index" wx:key="index">
 			<view wx:if="{{isForwardTiming}}" class="content" data-task-color="{{item.color}}" data-task-name="{{item.name}}" data-task-index="{{index}}" data-target="editModal" bindlongpress="showModal" bindtap="toCounter">
-				<view class="cuIcon-{{item.icon}} text-{{item.color}}"></view>
+				<view style="opacity:0.8" class="cuIcon-{{item.icon}} text-{{item.color}}"></view>
 				<text style="color:#999; padding:0 30rpx">{{item.name}}</text>
 			</view>
 			<view wx:else class="content" data-task-color="{{item.color}}" data-task-name="{{item.name}}" data-task-index="{{index}}" data-target="editModal" bindlongpress="showModal" bindtap="toTimer">
-				<view class="cuIcon-{{item.icon}} text-{{item.color}}"></view>
+				<view style="opacity:0.8" class="cuIcon-{{item.icon}} text-{{item.color}}"></view>
 				<text style="color:#999; padding:0 30rpx">{{item.name}}</text>
 			</view>
 		</view>

@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/start/start",
-    "pages/stats/stats",
     "pages/my/my",
+    "pages/stats/stats",
+    "pages/start/start",
     "pages/counter/counter",
     "pages/timer/timer",
     "pages/index/index",

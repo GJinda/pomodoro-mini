@@ -10,7 +10,9 @@
 			<view style="transform:rotate({{rightDeg}}deg)" class="circle right-circle-white"></view>
 		</view>
 	</view>
-	<view wx:else class="{{timer?'animation-scale-down animation-reverse':'animation-scale-down'}} emoji cuIcon-emoji circle-wrapper"></view>
+	<view wx:else class="{{timer?'animation-scale-down animation-reverse':'animation-scale-down'}} circle-wrapper flex flex-direction justify-center align-center">
+		<image src="../../images/smile.svg"></image>
+	</view>
 	<!-- <view>显示剩余秒数：{{time}}</view> -->
 	<button style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn bg-white text-red round margin-sm" hidden="{{time}}" bindtap="startNewTimer">开始新番茄</button>
 	<button style="height:100rpx; width:300rpx; font-weight:normal;" class="cu-btn bg-white text-red round margin-sm" hidden="{{!time||timer}}" bindtap="startTimer">继续</button>

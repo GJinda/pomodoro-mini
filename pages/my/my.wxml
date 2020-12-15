@@ -1,8 +1,10 @@
 <view class="userinfo shadow-warp">
 	<button style="width:240rpx" class="cu-btn line-white text-red" wx:if="{{!hasUserInfo && canIUse}}" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 获取头像昵称 </button>
 	<block wx:else>
-		<image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
-		<text class="text-white">{{userInfo.nickName}}</text>
+		<view class="userinfo-avatar-wrapper flex justify-center align-center">
+			<image class="userinfo-avatar" src="{{userInfo.avatarUrl}}" mode="cover"></image>
+		</view>
+		<view class="text-white">{{userInfo.nickName}}</view>
 	</block>
 </view>
 <!-- <view class="grid col-3 padding-sm">
@@ -12,43 +14,195 @@
 	</view>
 </view> -->
 <view class="cu-list menu card-menu margin-top-lg margin-bottom-lg">
-	<view class="cu-item" bindtap="toggleIntro">
+	<view class="cu-item" bindtap="showIntroModal">
 		<view class="content">
 			<text class="cuIcon-countdownfill text-red"></text>
 			<text class="text-grey">番茄工作法介绍</text>
 		</view>
 	</view>
-	<view wx:if="{{showIntro}}" class="cu-item">
-		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7" class='text-content text-grey'>
-			<view>
-				<!-- <text class="cuIcon-title"></text> -->
-				设定你的番茄钟，推荐25分钟
-			</view>
-			<view class='margin-top-sm'>
-				<!-- <text class="cuIcon-title"></text> -->
-				每使用一次番茄，休息5分钟，每使用四次可休息25分钟
-			</view>
-			<view class='margin-top-sm'>
-				<!-- <text class="cuIcon-title"></text> -->
-				Tip: 番茄的数量不能决定任务成败；个人番茄数据不要拿来相互比较
+	<view class="cu-modal {{modalName=='introModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:600rpx" class="cu-dialog" catchtap>
+			<view class="cu-item">
+				<view class="padding flex justify-between">
+					<view class="flex align-center">
+						<text style="color:transparent" class="cuIcon-close"></text>
+					</view>
+					<view class="text-grey">番茄工作法介绍</view>
+					<view class="flex align-center" bindtap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
+				</view>
+				<view style="padding: 0rpx 40rpx 40rpx; opacity: 0.7" class='text-content text-grey'>
+					<view>
+						<view style="height:100rpx; padding-bottom:30rpx" class="flex flex-direction justify-center align-center">
+							<image src="../../images/intro-work.svg"></image>
+						</view>
+						<!-- <text class="cuIcon-title"></text> -->
+						设定你的番茄钟，推荐25分钟，开始专注于你的工作
+					</view>
+					<view class='margin-top'>
+						<view style="height:100rpx; padding-left:5rpx; padding-bottom:30rpx" class="flex flex-direction justify-center align-center">
+							<image src="../../images/intro-pause.svg"></image>
+						</view>
+						<!-- <text class="cuIcon-title"></text> -->
+						每使用一次番茄，休息5分钟，每使用四次可休息25分钟
+					</view>
+					<view class='margin-top'>
+						<view style="height:100rpx; padding-bottom:30rpx; transform:scale(0.8)" class="flex flex-direction justify-center align-center">
+							<image src="../../images/intro-hint.svg"></image>
+						</view>
+						<!-- <text class="cuIcon-title"></text> -->
+						Tip: 番茄的数量不能决定任务成败；个人番茄数据不要拿来相互比较
+					</view>
+				</view>
 			</view>
 		</view>
 	</view>
+
+	<view class="cu-item">
+		<button class="cu-btn content" open-type="share" bindtap="onShareAppMessage">
+			<text style="opacity:0.6" class="cuIcon-forwardfill text-olive"></text>
+			<text style="font-weight:normal" class="text-grey">分享给朋友</text>
+		</button>
+	</view>
+
+	<view class="cu-item" bindtap="showLogModal">
+		<view class="content">
+			<text style="opacity:0.6" class="cuIcon-formfill text-blue"></text>
+			<text class="text-grey">日志</text>
+		</view>
+	</view>
+	<view class="cu-modal {{modalName=='logModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:600rpx" class="cu-dialog" catchtap>
+			<view class="bg-white padding flex justify-between">
+				<view class="flex align-center">
+					<text style="color:transparent" class="cuIcon-close"></text>
+				</view>
+				<view class="text-grey">日志</view>
+				<view class="flex align-center" bindtap="hideModal">
+					<text class="cuIcon-close text-red"></text>
+				</view>
+			</view>
+			<view class="cu-item">
+				<view style="overflow-y:auto; max-height:calc(100vh - 200rpx);" class="cu-list menu padding-top margin-lr margin-bottom-lg">
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.2.1</view>
+							<view class="cu-tag line-red">2020.6.25</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">新增番茄工作法介绍icon</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">优化我的页面布局（用户信息部分高度自适应）</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">修复iPad等大屏设备头像显示不正常问题</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.2.0</view>
+							<view class="cu-tag line-red">2020.6.22</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">新增赞赏功能，多多支持呀！</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">优化我的页面选项展示方式（采用模态框展示）</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.1.3</view>
+							<view class="cu-tag line-red">2020.5.16</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">重定义任务颜色列表，每条任务统计记录显示其对应颜色</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">统计记录时间新增标签进行区分</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">统计记录内容新增正向计时时长</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.1.2</view>
+							<view class="cu-tag line-red">2020.5.11</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">统计任务时将同一天的记录合并</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">加入正向计时文字提示信息，设置上限为3小时</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">加入正向计时“任务已完成”选项，用户可手动停止计时并记录</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.1.1</view>
+							<view class="cu-tag line-red">2020.4.30</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">我的页面选项内容展示改为收纳方式</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">设置选项记录在缓存中</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.1.0</view>
+							<view class="cu-tag line-red">2020.4.28</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">自定义任务不再需要输入描述信息</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">优化自定义任务名称修改方式（采用长按操作）</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">新增正向计时功能</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">新增背词、讨论、头脑风暴预设任务</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">新增设置选项，可自定义计时方式、屏幕是否为常亮，以及重置自定义任务名称为默认</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.0.2</view>
+							<view class="cu-tag line-red">2020.4.25</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">进入小程序后自动使用微信账号登录</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">修复无数据时循环加载页面的问题</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.0.1</view>
+							<view class="cu-tag line-red">2020.4.24</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">新增任务颜色标识</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">修改统计页无数据时icon展示样式与文字提示</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">放弃的任务不再记录</text></view>
+					</view>
+					<view style="border-radius:8rpx 8rpx 0 0" class="cu-item">
+						<view class="cu-capsule radius">
+							<view class="cu-tag bg-red">v1.0.0</view>
+							<view class="cu-tag line-red">2020.4.22</view>
+						</view>
+					</view>
+					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
+						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">1.0版本正式上线</text></view>
+					</view>
+				</view>
+			</view>
+		</view>
+	</view>
+
+	<view class="cu-item" bindtap="showReward">
+		<view class="content">
+			<text style="opacity:0.6" class="cuIcon-appreciatefill text-cyan"></text>
+			<text class="text-grey">赞赏支持</text>
+		</view>
+	</view>
+
 	<view class="cu-item">
 		<button class="cu-btn content" open-type="feedback">
-			<text style="opacity:0.8" class="cuIcon-writefill text-cyan"></text>
+			<text style="opacity:0.6" class="cuIcon-writefill text-orange"></text>
 			<text style="font-weight:normal" class="text-grey">意见反馈</text>
 		</button>
 	</view>
-	<view class="cu-item">
-		<button class="cu-btn content" open-type="share" bindtap="onShareAppMessage">
-			<text style="opacity:0.8" class="cuIcon-forwardfill text-blue"></text>
-			<text style="font-weight:normal" class="text-grey">分享</text>
-		</button>
-	</view>
-	<view class="cu-item" bindtap="toggleSetting">
+
+	<view class="cu-item" bindtap="showSettingModal">
 		<view class="content">
-			<text style="opacity:0.8; color:#666" class="cuIcon-settingsfill"></text>
+			<text style="opacity:0.6; color:#6666FF" class="cuIcon-settingsfill text-blue"></text>
 			<text class="text-grey">设置</text>
 		</view>
 	</view>
@@ -57,51 +211,69 @@
 			<scroll-view scroll-y style="min-height:240rpx">
 				<view style="padding:90rpx 60rpx" class="bg-white flex justify-center align-center text-black text-bold">确定要重置吗？此操作不可逆</view>
 				<view style="padding-bottom:40rpx" class="bg-white flex justify-center align-center">
-					<button style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round" bindtap="cancel">取消</button>
+					<button style="width:160rpx; font-weight:normal; margin:0 40rpx 0 0" class="cu-btn line-red round" bindtap="cancelResetTask">取消</button>
 					<button style="width:160rpx; font-weight:normal; margin:0" class="cu-btn bg-red round" bindtap="resetTask">确定</button>
 				</view>
 			</scroll-view>
 		</view>
 	</view>
-	<view wx:if="{{showSetting}}" class="cu-item">
-		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7; width:100%" class='text-content text-grey'>
-			<view class="flex justify-between">
-				<view>屏幕常亮</view>
-				<view>
-					<switch class="red" checked="{{isKeepScreen}}" bindchange="onSwitchScreen"></switch>
+	<view class="cu-modal {{modalName=='settingModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:600rpx" class="cu-dialog" catchtap>
+			<view class="cu-item">
+				<view class="padding flex justify-between">
+					<view class="flex align-center">
+						<text style="color:transparent" class="cuIcon-close"></text>
+					</view>
+					<view class="text-grey">设置</view>
+					<view class="flex align-center" bindtap="hideModal">
+						<text class="cuIcon-close text-red"></text>
+					</view>
 				</view>
-			</view>
-			<view class="flex justify-between margin-top">
-				<view>计时模式</view>
-				<view class="flex">
-					<view wx:if="{{isForwardTiming}}" class="margin-right-sm">正向</view>
-					<view wx:else class="margin-right-sm">反向</view>
-					<switch class="red" checked="{{isForwardTiming}}" bindchange="onSwitchTiming"></switch>
-				</view>
-			</view>
-			<view class="flex justify-between margin-top">
-				<view>重置任务名称</view>
-				<view class="flex">
-					<switch class="red" checked="{{isResetTask}}" bindchange="onSwitchReset"></switch>
+				<view style="padding: 0rpx 30rpx 35rpx; opacity: 0.7; width:100%" class='text-content text-grey'>
+					<view class="flex justify-between">
+						<view>屏幕常亮</view>
+						<view>
+							<switch class="red" checked="{{isKeepScreen}}" bindchange="onSwitchScreen"></switch>
+						</view>
+					</view>
+					<view class="flex justify-between margin-top">
+						<view>计时模式</view>
+						<view class="flex">
+							<view wx:if="{{isForwardTiming}}" class="margin-right-sm">正向</view>
+							<view wx:else class="margin-right-sm">反向</view>
+							<switch class="red" checked="{{isForwardTiming}}" bindchange="onSwitchTiming"></switch>
+						</view>
+					</view>
+					<view class="flex justify-between margin-top">
+						<view>重置任务名称</view>
+						<view class="flex">
+							<switch class="red" checked="{{isResetTask}}" bindchange="onSwitchReset"></switch>
+						</view>
+					</view>
 				</view>
 			</view>
 		</view>
 	</view>
-	<view class="cu-item" bindtap="toggleAbout">
+
+	<view class="cu-item" bindtap="showAboutModal">
 		<view class="content">
-			<text style="opacity:0.8" class="cuIcon-infofill text-grey"></text>
-			<text class="text-grey">关于</text>
+			<text style="opacity:0.6" class="cuIcon-infofill text-grey"></text>
+			<text class="text-grey">关于小程序</text>
 		</view>
 	</view>
-	<view wx:if="{{showAbout}}" class="cu-item">
-		<view style="padding: 30rpx 15rpx 30rpx; opacity: 0.7" class='text-content text-grey'>
-			<view>
-				Hi~ 欢迎使用
-				<text class="text-bold text-red">mini番茄钟~</text>
+	<view class="cu-modal {{modalName=='aboutModal'?'show':''}}" bindtap="hideModal">
+		<view style="width:600rpx" class="cu-dialog" catchtap>
+			<view class="cu-item">
+				<view style="padding: 40rpx; opacity: 0.7" class='text-left text-content text-grey'>
+					<view>
+						Hi~ 欢迎使用
+						<text class="text-bold text-red">mini番茄钟~</text>
+					</view>
+					<view class='margin-top'>这是我个人开发的一款番茄闹钟小程序，不含任何广告，随便点。</view>
+					<view class='margin-top'>如果这个项目帮到了你，或者你觉得很赞，不妨打个赏支持一下。</view>
+					<view class='margin-top'>更多功能敬请期待！</view>
+				</view>
 			</view>
-			<view class='margin-top-sm'>这是我个人开发的一款番茄闹钟小程序。</view>
-			<view class='margin-top-sm'>如果这个项目帮到了你，或者你觉得很赞，可以推荐给朋友使用。</view>
-			<view class='margin-top-sm'>更多功能敬请期待！</view>
 		</view>
 	</view>
 </view>

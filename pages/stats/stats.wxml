@@ -11,7 +11,8 @@
 	</view>
 	<view hidden="{{isLoading || dayTaskList.length}}" class="none-wrapper flex flex-direction justify-center align-center">
 		<image src="../../images/none.svg"></image>
-		<view class="margin-top text-red">暂无数据</view>
+		<view class="margin-top text-red">暂无数据 ...</view>
+		<view class="margin-top text-red">快去开始一个新的番茄吧 !</view>
 	</view>
 	<view wx:for="{{dayTaskList}}" wx:for-item="dayTaskItem" wx:for-index="dayTaskIndex" wx:key="dayTaskIndex" class="cu-timeline padding-bottom-sm">
 		<view class="cu-time">{{dayTaskItem.day.month < 10? "0"+dayTaskItem.day.month : dayTaskItem.day.month}}-{{dayTaskItem.day.day < 10? "0"+dayTaskItem.day.day : dayTaskItem.day.day}}</view>
@@ -19,8 +20,8 @@
 			<view style="animation-delay: {{dayTaskIndex>0?dayTaskList[dayTaskIndex-1].tasks.length*0.1+taskIndex*0.1:taskIndex*0.1}}s;" class="animation-fade cu-item text-{{taskItem.taskColor}}">
 				<view class="content">
 					<view class="cu-capsule radius align-center">
-						<view class="cu-tag bg-{{taskItem.taskColor}} text-white">{{taskItem.finishTime.hour <= 12? "上午":"下午"}}</view>
-						<view class="cu-tag line-{{taskItem.taskColor}}">{{taskItem.finishTime.hour < 10? "0"+taskItem.finishTime.hour : taskItem.finishTime.hour > 12? taskItem.finishTime.hour-12 : taskItem.finishTime.hour}}:{{taskItem.finishTime.minute < 10? "0"+taskItem.finishTime.minute : taskItem.finishTime.minute}}</view>
+						<view class="cu-tag bg-{{taskItem.taskColor}} text-white">{{taskItem.finishTime.hour < 18? (taskItem.finishTime.hour < 12? (taskItem.finishTime.hour < 6? "凌晨" : "上午") : "下午") : "晚上"}}</view>
+						<view class="cu-tag line-{{taskItem.taskColor}}">{{taskItem.finishTime.hour < 10? "0" + taskItem.finishTime.hour : taskItem.finishTime.hour}}:{{taskItem.finishTime.minute < 10? "0" + taskItem.finishTime.minute : taskItem.finishTime.minute}}</view>
 						<view class="margin-left-sm text-sm text-{{taskItem.taskColor}}">{{taskItem.taskName}}</view>
 					</view>
 					<view wx:if="{{taskItem.taskDetail}}" class="margin-top text-sm text-{{taskItem.taskColor}}">{{taskItem.taskDetail}}</view>
