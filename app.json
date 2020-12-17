@@ -1,8 +1,8 @@
 {
   "pages": [
-    "pages/my/my",
-    "pages/stats/stats",
     "pages/start/start",
+    "pages/stats/stats",
+    "pages/my/my",
     "pages/counter/counter",
     "pages/timer/timer",
     "pages/index/index",
@@ -18,7 +18,7 @@
   },
   "tabBar": {
     "color": "#8a8a8a",
-    "selectedColor": "#2c2c2c",
+    "selectedColor": "#e54d42",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
     "list": [

@@ -52,7 +52,7 @@
 							<image src="../../images/intro-hint.svg"></image>
 						</view>
 						<!-- <text class="cuIcon-title"></text> -->
-						Tip: 番茄的数量不能决定任务成败；个人番茄数据不要拿来相互比较
+						Tip: 番茄的数量不能决定任务成败；个人番茄数据不必拿来相互比较
 					</view>
 				</view>
 			</view>
@@ -61,14 +61,14 @@
 
 	<view class="cu-item">
 		<button class="cu-btn content" open-type="share" bindtap="onShareAppMessage">
-			<text style="opacity:0.6" class="cuIcon-forwardfill text-olive"></text>
+			<text style="opacity:0.6" class="cuIcon-forwardfill text-orange"></text>
 			<text style="font-weight:normal" class="text-grey">分享给朋友</text>
 		</button>
 	</view>
 
 	<view class="cu-item" bindtap="showLogModal">
 		<view class="content">
-			<text style="opacity:0.6" class="cuIcon-formfill text-blue"></text>
+			<text style="opacity:0.6" class="cuIcon-formfill text-olive"></text>
 			<text class="text-grey">日志</text>
 		</view>
 	</view>
@@ -93,6 +93,7 @@
 					</view>
 					<view style="border-radius:0 0 8rpx 8rpx" class="flex-direction margin-bottom bg-red">
 						<view class="cuIcon-title text-left text-white padding-sm"><text class="padding-left-xs">新增番茄工作法介绍icon</text></view>
+						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">更改选项卡选中时的颜色为主题色</text></view>
 						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">优化我的页面布局（用户信息部分高度自适应）</text></view>
 						<view class="cuIcon-title text-left text-white padding-lr-sm padding-bottom-sm"><text class="padding-left-xs">修复iPad等大屏设备头像显示不正常问题</text></view>
 					</view>
@@ -195,7 +196,7 @@
 
 	<view class="cu-item">
 		<button class="cu-btn content" open-type="feedback">
-			<text style="opacity:0.6" class="cuIcon-writefill text-orange"></text>
+			<text style="opacity:0.6" class="cuIcon-writefill text-blue"></text>
 			<text style="font-weight:normal" class="text-grey">意见反馈</text>
 		</button>
 	</view>
@@ -270,7 +271,7 @@
 						<text class="text-bold text-red">mini番茄钟~</text>
 					</view>
 					<view class='margin-top'>这是我个人开发的一款番茄闹钟小程序，不含任何广告，随便点。</view>
-					<view class='margin-top'>如果这个项目帮到了你，或者你觉得很赞，不妨打个赏支持一下。</view>
+					<view class='margin-top'>如果这个小程序帮到了你，或者你觉得很赞，不妨打个赏支持一下。</view>
 					<view class='margin-top'>更多功能敬请期待！</view>
 				</view>
 			</view>
